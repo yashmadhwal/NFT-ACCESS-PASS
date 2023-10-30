@@ -20,11 +20,6 @@ module.exports = {
     bsc_testnet: {
       url: process.env.BSC_TEST,
       accounts: [process.env.PRIVATE_KEY],
-      // verify: {
-      //   etherscan: {
-      //     apiKey: process.env.API_KEY,
-      //   },
-      // },
     },
   },
   gasReporter: {
