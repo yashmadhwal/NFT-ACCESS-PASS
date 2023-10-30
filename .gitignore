@@ -1,0 +1,14 @@
+# Contract
+# Added in repository
+contract/node_modules
+contract/artifacts
+contract/cache
+contract/package-lock.json
+contract/deployments/
+contract/.env
+contract/typechain-types
+
+# Frontend
+frontend/node_modules
+frontend/.env
+frontend/package-lock.json
