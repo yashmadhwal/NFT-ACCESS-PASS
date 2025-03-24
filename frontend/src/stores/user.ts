@@ -34,6 +34,8 @@ export const useUser = defineStore("user", {
       this._signer = () => signer;
       this.login = true;
       this.chainId = chainId.toString();
+
+
     },
 
     async connectMetamask() {
@@ -41,8 +43,9 @@ export const useUser = defineStore("user", {
       console.log("loading", this.loading);
       console.log("chain ID", this.chainId);
       this.loading = true;
-
       console.log("this.loading", this.loading);
+
+      // alert("Connect to Binance Testnet!\nRead more: https://revoke.cash/learn/wallets/add-network/bnb-chain-testnet")
 
       try {
         if (!(window as any).ethereum)
@@ -59,12 +62,21 @@ export const useUser = defineStore("user", {
         );
         const signer = provider.getSigner();
         const chainId = (await provider?.getNetwork())?.chainId;
-
-        if ((await signer.getChainId()).toString() != this.chainId) {
+        if (chainId != this.chainId) {
+          console.log('Jai Shree Ram ')
+          alert("Connect to Binance Testnet!\nRead more: https://revoke.cash/learn/wallets/add-network/bnb-chain-testnet")
           this.loading = false;
-          // this.openConnectWindow();
-          return;
+          return; 
+          }
+          else {
+            if ((await signer.getChainId()).toString() != this.chainId) {
+              this.loading = false;
+              // this.openConnectWindow();
+              return;
+            
+          }
         }
+
 
         await this.connect(wallet, signer, chainId.toString());
         ((window as any).ethereum as any).once(
@@ -73,6 +85,8 @@ export const useUser = defineStore("user", {
             await this.connectMetamask();
           }
         );
+
+
       } catch (err: any) {
         console.log("error");
         console.log(err);

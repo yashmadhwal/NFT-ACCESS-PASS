@@ -1,106 +1,104 @@
 <template>
-    <div class="container mx-auto p-[10px] bg-[#D3D3E0]">
-        <div class="text-center p-[5px] text-2xl tracking-[2px] w-max mx-auto border-b-[2px] border-black">
-            Buy NFTs here!
+    <div class="container mx-auto p-6 bg-gradient-to-b from-[#E3E3F0] to-[#F5F5FA] min-h-screen rounded-lg shadow-lg">
+
+        <!-- Title -->
+        <div class="text-center p-4 text-3xl font-bold text-[#4A4A8D] tracking-wide border-b-2 border-[#4A4A8D] w-max mx-auto">
+            Buy NFTs Here!
         </div>
 
-        <!-- You should be login else go home screen -->
-        <div v-if="!login">
-            You need to login firt
+        <!-- Login Prompt -->
+        <div v-if="!login" class="text-center text-red-500 font-bold mt-6">
+            You need to log in first
         </div>
 
+        <!-- NFT Listing -->
+        <div v-else class="flex justify-center flex-wrap gap-8 text-center p-6">
 
-
-        <!-- listing 3 NFTs -->
-        <div v-else class="flex justify-around flex-wrap text-center p-[20px]">
-            <!-- 1. BASIC -->
-            <div v-if= "userInfo.status == 'FREE'" class="w-[150px]">
-                <div>
-                    BASIC
-                </div>
+            <!-- 1. BASIC NFT -->
+            <div v-if="userInfo.status == 'FREE'" class="w-[200px] bg-white rounded-lg shadow-md p-4 border border-[#4A4A8D]">
+                <div class="font-bold text-[#4A4A8D]">BASIC</div>
 
                 <div v-if="!infoLoaded">
-                    <!-- <div>{{ NFTPrice.BASIC.Link }}</div> -->
-                    <img :src="NFTPrice.BASIC.Link " class="h-[100px] mx-auto rounded-[10px] border border-black m-[10px]">
-                    <div>{{ NFTPrice.BASIC.Price }} ETH</div>
+                    <img :src="NFTPrice.BASIC.Link" class="h-[120px] mx-auto rounded-lg border border-gray-300 shadow-sm my-3">
+                    <div class="text-gray-700">{{ NFTPrice.BASIC.Price }} ETH</div>
+
                     <div class="w-full">
-                        <div @click="buyPass(NFTPrice.BASIC.Price, 1)" v-if='!loading && login'
-                            class="p-[5px] m-[5px] bg-[#ffad39] hover:bg-[#c28b3e] rounded-[30px] grid place-content-center cursor-pointer">
-                            Buy Basic</div>
-                        <div v-if='loading'
-                            class="mt-[10px] mb-[10px] h-[50px] bg-[#ffad39] rounded-[30px] grid place-content-center cursor-progress">
-                            <div v-if='loading' class="flex"><img src="../assets/Icons/loaging.png" alt=""
-                                    class="motion-reduce:hidden animate-spin dark:invert">&nbsp;&nbsp;Loading...</div>
+                        <div 
+                            @click="buyPass(NFTPrice.BASIC.Price, 1)" 
+                            v-if='!loading && login'
+                            class="buy-button bg-[#008080] hover:bg-[#3A3A7D] text-white font-bold py-2 px-4 rounded-full shadow-md cursor-pointer mt-3 transition-all">
+                            Buy Basic
+                        </div>
+
+                        <div v-if='loading' class="h-[50px] flex items-center justify-center text-gray-500 mt-3">
+                            <img src="../assets/Icons/loaging.png" alt="" class="w-5 h-5 animate-spin">
+                            &nbsp;&nbsp;Loading...
                         </div>
                     </div>
                 </div>
-                <div v-else class="h-[50px] flex justify-center">
-                    <img src="../assets/Icons/loaging.png" alt="" class="motion-reduce:hidden animate-spin">
-                </div>
             </div>
 
-            <!-- 2. SILVER -->
-            <div v-if= "userInfo.status == 'FREE' || userInfo.status == 'BASIC'" class="w-[150px]">
-                <div>
-                    SILVER
-                </div>
+            <!-- 2. SILVER NFT -->
+            <div v-if="userInfo.status == 'FREE' || userInfo.status == 'BASIC'" 
+                class="w-[200px] bg-white rounded-lg shadow-md p-4 border border-[#c0c0c0]">
+                <div class="font-bold text-[#4A4A8D]">SILVER</div>
 
                 <div v-if="!infoLoaded">
-                    <!-- <div>{{ NFTPrice.SILVER.Link }}</div> -->
-                    <img :src="NFTPrice.SILVER.Link " class="h-[100px] mx-auto rounded-[10px] border border-black m-[10px]">
-                    <div>{{ NFTPrice.SILVER.Price }} ETH</div>
+                    <img :src="NFTPrice.SILVER.Link" class="h-[120px] mx-auto rounded-lg border border-gray-300 shadow-sm my-3">
+                    <div class="text-gray-700">{{ NFTPrice.SILVER.Price }} ETH</div>
+
                     <div class="w-full">
-                        <div @click="buyPass(NFTPrice.SILVER.Price, 2)" v-if='!loading && login'
-                            class="p-[5px] m-[5px] bg-[#ffad39] hover:bg-[#c28b3e] rounded-[30px] grid place-content-center cursor-pointer">
-                            Buy Silver</div>
-                        <div v-if='loading'
-                            class="mt-[10px] mb-[10px] h-[50px] bg-[#ffad39] rounded-[30px] grid place-content-center cursor-progress">
-                            <div v-if='loading' class="flex"><img src="../assets/Icons/loaging.png" alt=""
-                                    class="motion-reduce:hidden animate-spin dark:invert">&nbsp;&nbsp;Buying...</div>
+                        <div 
+                            @click="buyPass(NFTPrice.SILVER.Price, 2)" 
+                            v-if='!loading && login'
+                            class="buy-button bg-[#c0c0c0] hover:bg-[#3A3A7D] text-white font-bold py-2 px-4 rounded-full shadow-md cursor-pointer mt-3 transition-all">
+                            Buy Silver
+                        </div>
+
+                        <div v-if='loading' class="h-[50px] flex items-center justify-center text-gray-500 mt-3">
+                            <img src="../assets/Icons/loaging.png" alt="" class="w-5 h-5 animate-spin">
+                            &nbsp;&nbsp;Buying...
                         </div>
                     </div>
                 </div>
-                <div v-else class="h-[50px] flex justify-center">
-                    <img src="../assets/Icons/loaging.png" alt="" class="motion-reduce:hidden animate-spin">
-                </div>
             </div>
 
-            <!-- 3. GOLDEN -->
-            <div v-if= "userInfo.status == 'FREE' || userInfo.status == 'BASIC' || userInfo.status == 'SILVER'" class="w-[150px]">
-                <div>
-                    GOLDEN
-                </div>
+            <!-- 3. GOLDEN NFT -->
+            <div v-if="userInfo.status == 'FREE' || userInfo.status == 'BASIC' || userInfo.status == 'SILVER'" 
+                class="w-[200px] bg-white rounded-lg shadow-md p-4 border border-yellow-400">
+                <div class="font-bold text-[#4A4A8D]">GOLDEN</div>
 
                 <div v-if="!infoLoaded">
-                    <!-- <div>{{ NFTPrice.GOLDEN.Link }}</div> -->
-                    <img :src="NFTPrice.GOLDEN.Link " class="h-[100px] mx-auto rounded-[10px] border border-black m-[10px]">
-                    <div>{{ NFTPrice.GOLDEN.Price }} ETH</div>
+                    <img :src="NFTPrice.GOLDEN.Link" class="h-[120px] mx-auto rounded-lg border border-gray-300 shadow-sm my-3">
+                    <div class="text-gray-700">{{ NFTPrice.GOLDEN.Price }} ETH</div>
+
                     <div class="w-full">
-                        <div @click="buyPass(NFTPrice.GOLDEN.Price, 3)" v-if='!loading && login'
-                            class="p-[5px] m-[5px] bg-[#ffad39] hover:bg-[#c28b3e] rounded-[30px] grid place-content-center cursor-pointer">
-                            Buy Golden</div>
-                        <div v-if='loading'
-                            class="mt-[10px] mb-[10px] h-[50px] bg-[#ffad39] rounded-[30px] grid place-content-center cursor-progress">
-                            <div v-if='loading' class="flex"><img src="../assets/Icons/loaging.png" alt=""
-                                    class="motion-reduce:hidden animate-spin dark:invert">&nbsp;&nbsp;Loading...</div>
+                        <div 
+                            @click="buyPass(NFTPrice.GOLDEN.Price, 3)" 
+                            v-if='!loading && login'
+                            class="buy-button bg-[#FFD700] hover:bg-[#EAC117] text-black font-bold py-2 px-4 rounded-full shadow-md cursor-pointer mt-3 transition-all">
+                            Buy Golden
+                        </div>
+
+                        <div v-if='loading' class="h-[50px] flex items-center justify-center text-gray-500 mt-3">
+                            <img src="../assets/Icons/loaging.png" alt="" class="w-5 h-5 animate-spin">
+                            &nbsp;&nbsp;Loading...
                         </div>
                     </div>
                 </div>
-                <div v-else class="h-[50px] flex justify-center">
-                    <img src="../assets/Icons/loaging.png" alt="" class="motion-reduce:hidden animate-spin">
-                </div>
             </div>
 
-            <div v-else>
-                Awesome! You have highest access!
+            <div v-else class="text-green-500 font-bold mt-6">
+                Awesome! You have the highest access!
             </div>
         </div>
 
-
-        <!-- Show only the upgradable options -->
-        <div class="flex justify-center">
+        <!-- Main Page Button -->
+        <div class="flex justify-center mt-8">
             <router-link to="/">
-                <button class="border p-[8px] rounded-[10px] text-[20px] bg-[#fffff4]">Main Page</button>
+                <button class="border border-[#4A4A8D] text-[#4A4A8D] font-bold py-2 px-6 rounded-full hover:bg-[#4A4A8D] hover:text-white transition-all">
+                    Main Page
+                </button>
             </router-link>
         </div>
     </div>

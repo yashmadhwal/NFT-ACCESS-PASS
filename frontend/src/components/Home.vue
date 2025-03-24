@@ -1,42 +1,43 @@
 <template>
-    <div class="container mx-auto bg-[#D3D3E0]">
-        <div class="p-[20px] flex flex-col justify-between">
-
+    <div class="container mx-auto bg-gradient-to-br from-[#D3D3E0] to-[#E8E8F3] min-h-screen flex items-center justify-center p-6">
+        <div class="bg-white shadow-xl rounded-3xl p-8 w-full max-w-3xl">
+            
             <!-- Heading -->
-            <div class="text-[30px] mx-auto p-[10px] text-center pb-[1px]">
-                NFT-based Access
+            <div class="text-4xl font-bold text-center text-[#4B4B7D] pb-4 border-b border-[#D3D3E0]">
+                NFT Based Access
             </div>
 
-            <!-- Conect Wallet -->
-            <div class="flex justify-center">
-                <ConnectWallet></ConnectWallet>
+            <!-- Connect Wallet -->
+            <div class="flex justify-center my-6">
+                <ConnectWallet class="bg-[#4B4B7D] text-white py-2 px-6 rounded-3xl shadow-md hover:bg-[#5C5C9E] transition-all"></ConnectWallet>
             </div>
 
             <!-- User Info -->
-            <div v-if="login && !loading">
+            <div v-if="login && !loading" class="space-y-4">
                 <userInfo></userInfo>
-                <!-- Free -->
-                <div v-if="userInfo.status == 'FREE'" class="border border-black border-[2px] rounded-[25px]">
+
+                <!-- Free Access -->
+                <div v-if="userInfo.status == 'FREE'" class="bg-[#E8F0FE] border border-[#4B4B7D] rounded-2xl p-4 shadow-md">
                     <Free></Free>
                 </div>
 
-                <!-- Basic -->
-                <div v-if="userInfo.status == 'BASIC'" class="border border-black border-[2px] rounded-[25px]">
+                <!-- Basic Access -->
+                <div v-if="userInfo.status == 'BASIC'" class="bg-[#D3E3FC] border border-[#4B4B7D] rounded-2xl p-4 shadow-md">
                     <Basic></Basic>
-                 </div>
+                </div>
 
-                <!-- Silver -->
-                <div v-if="userInfo.status == 'SILVER'" class="border border-black border-[2px] rounded-[25px]">
+                <!-- Silver Access -->
+                <div v-if="userInfo.status == 'SILVER'" class="bg-[#BCC8F5] border border-[#4B4B7D] rounded-2xl p-4 shadow-md">
                     <Silver></Silver>
                 </div>
 
-                <!-- Golden -->
-                <div v-if="userInfo.status == 'GOLDEN'" class="border border-black border-[2px] rounded-[25px]">
+                <!-- Golden Access -->
+                <div v-if="userInfo.status == 'GOLDEN'" class="bg-[#FFD700] border border-[#4B4B7D] rounded-2xl p-4 shadow-md">
                     <Golden></Golden>
                 </div>
             </div>
 
-            <div v-else class="text-center m-[20px]">
+            <div v-else class="text-center text-[#4B4B7D] mt-6 text-lg">
                 Connect wallet to access content(s)
             </div>
         </div>

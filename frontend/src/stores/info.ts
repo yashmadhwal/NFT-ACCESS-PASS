@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ethers, providers } from "ethers";
+import { ethers } from "ethers";
 
 import { safe, useContracts } from "../../utils";
 
